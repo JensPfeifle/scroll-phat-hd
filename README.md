@@ -46,7 +46,7 @@ other environments:
 pip3 install scrollphathd
 ```
 
-This library requires Python 3.9 or newer and is tested up to Python 3.14.
+This library requires Python 3.7 or newer and is tested up to Python 3.14.
 
 #### Install from this repository:
 
@@ -76,6 +76,26 @@ Append `@<branch>`, `@<tag>` or `@<commit>` after `.git` to pin a specific
 revision, e.g. `...scroll-phat-hd.git@master#subdirectory=library`. `numpy` and
 `smbus2` are installed automatically as dependencies. The same URLs work with
 plain `pip` in place of `uv pip`.
+
+##### Installing on an older Raspberry Pi OS (e.g. Buster, 32-bit):
+
+On 32-bit Raspberry Pi OS there are no prebuilt `numpy` wheels on PyPI, so a
+plain install tries to compile `numpy` from source and usually fails. Use the
+[piwheels](https://www.piwheels.org/) index, which serves prebuilt ARM wheels,
+and install against the system Python so the wheel tags match:
+
+```bash
+uv add --python "$(command -v python3)" \
+  --index https://www.piwheels.org/simple \
+  "scrollphathd @ git+https://github.com/JensPfeifle/scroll-phat-hd.git#subdirectory=library"
+```
+
+The `--index` flag adds piwheels ahead of PyPI while still falling back to PyPI
+for anything piwheels doesn't carry, so `numpy` installs as a prebuilt wheel
+with no compilation. If you prefer plain `pip`, piwheels is already configured
+in `/etc/pip.conf` on Raspberry Pi OS, so `pip3 install "git+...#subdirectory=library"`
+works too. Note that Buster is end-of-life; upgrading to Bullseye or Bookworm is
+recommended where possible.
 
 ### Development:
 

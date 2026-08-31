@@ -7,7 +7,7 @@ name = "scrollphathd"
 dynamic = ["version"]
 description = "Scroll pHAT HD Driver"
 readme = "README.rst"
-requires-python = ">=3.9"
+requires-python = ">=3.7"
 license = "MIT"
 license-files = ["LICENSE.txt"]
 authors = [
@@ -24,6 +24,8 @@ classifiers = [
     "Topic :: Software Development",
     "Topic :: System :: Hardware",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",

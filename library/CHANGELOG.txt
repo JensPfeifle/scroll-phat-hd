@@ -2,7 +2,7 @@
 -----
 
 * Packaging: Migrated from setup.py to a PEP 621 pyproject.toml (hatchling build backend), managed with uv
-* Improvement: Dropped Python 2 support; now targets Python 3.9 - 3.14
+* Improvement: Dropped Python 2 support; now targets Python 3.7 - 3.14 (3.7/3.8 kept for older Raspberry Pi OS releases such as Buster)
 * BugFix: Replaced Flask's removed ``before_app_first_request`` hook so the HTTP API works on Flask 2.3+
 * Improvement: HTTP API now reads JSON with ``silent=True`` for graceful fallback to form data on modern Flask
 

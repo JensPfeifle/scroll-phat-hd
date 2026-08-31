@@ -56,7 +56,18 @@ other environments:
 
     pip3 install scrollphathd
 
-This library requires Python 3.9 or newer and is tested up to Python 3.14.
+This library requires Python 3.7 or newer and is tested up to Python 3.14.
+
+On 32-bit Raspberry Pi OS (e.g. Buster) there are no prebuilt ``numpy``
+wheels on PyPI, so install against the system Python using the
+`piwheels <https://www.piwheels.org/>`_ index to avoid compiling ``numpy``
+from source:
+
+.. code:: bash
+
+    uv add --python "$(command -v python3)" \
+        --index https://www.piwheels.org/simple \
+        "scrollphathd @ git+https://github.com/JensPfeifle/scroll-phat-hd.git#subdirectory=library"
 
 Development:
 ~~~~~~~~~~~~
