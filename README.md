@@ -48,6 +48,35 @@ pip3 install scrollphathd
 
 This library requires Python 3.9 or newer and is tested up to Python 3.14.
 
+#### Install from this repository:
+
+The installable package lives in the `library/` subdirectory of this repository,
+so any install straight from GitHub must point at it with `subdirectory=library`.
+
+To add it as a dependency of another [uv](https://docs.astral.sh/uv/) project:
+
+```bash
+uv add "scrollphathd @ git+https://github.com/JensPfeifle/scroll-phat-hd.git#subdirectory=library"
+```
+
+To pull in the optional Flask-based HTTP API dependencies as well, request the
+`http` extra:
+
+```bash
+uv add "scrollphathd[http] @ git+https://github.com/JensPfeifle/scroll-phat-hd.git#subdirectory=library"
+```
+
+For a one-off install into the current environment:
+
+```bash
+uv pip install "git+https://github.com/JensPfeifle/scroll-phat-hd.git#subdirectory=library"
+```
+
+Append `@<branch>`, `@<tag>` or `@<commit>` after `.git` to pin a specific
+revision, e.g. `...scroll-phat-hd.git@master#subdirectory=library`. `numpy` and
+`smbus2` are installed automatically as dependencies. The same URLs work with
+plain `pip` in place of `uv pip`.
+
 ### Development:
 
 This project is managed with [uv](https://docs.astral.sh/uv/) and uses a
