@@ -43,31 +43,33 @@ sudo apt-get install python3-scrollphathd
 other environments: 
 
 ```bash
-sudo pip3 install scrollphathd
+pip3 install scrollphathd
 ```
 
-#### Library install for Python 2:
-
-on Raspbian:
-
-```bash
-sudo apt-get install python-scrollphathd
-```
-
-other environments: 
-
-```bash
-sudo pip2 install scrollphathd
-```
+This library requires Python 3.9 or newer and is tested up to Python 3.14.
 
 ### Development:
 
-If you want to contribute, or like living on the edge of your seat by having the latest code, you should clone this repository, `cd` to the library directory, and run:
+This project is managed with [uv](https://docs.astral.sh/uv/) and uses a
+standard `pyproject.toml`. If you want to contribute, or like living on the
+edge of your seat by having the latest code, clone this repository, `cd` to
+the `library` directory, and run:
 
 ```bash
-sudo python3 setup.py install
+uv sync
 ```
-(or `sudo python setup.py install` whichever your primary Python environment may be)
+
+To include the optional Flask-based HTTP API dependencies, run:
+
+```bash
+uv sync --extra http
+```
+
+You can then run commands inside the managed environment with `uv run`, e.g.:
+
+```bash
+uv run python examples/hello-world.py
+```
 
 In all cases you will have to enable the i2c bus.
 

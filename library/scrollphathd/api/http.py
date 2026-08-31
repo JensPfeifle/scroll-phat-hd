@@ -1,23 +1,14 @@
-import scrollphathd
-
+import http.client as http_status
 import threading
-
 from argparse import ArgumentParser
+from queue import Queue
 
-try:
-    from queue import Queue, Empty
-except ImportError:
-    from Queue import Queue, Empty
+from flask import Blueprint, Flask, jsonify, request
+
+import scrollphathd
 
 from .action import Action
 from .stoppablethread import StoppableThread
-
-try:
-    import http.client as http_status
-except ImportError:
-    import httplib as http_status
-
-from flask import Blueprint, render_template, abort, request, jsonify, Flask
 
 scrollphathd_blueprint = Blueprint('scrollhat', __name__)
 api_queue = Queue()
@@ -52,7 +43,7 @@ def autoscroll():
     response = {"result": "success"}
     status_code = http_status.OK
 
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if data is None:
         data = request.form
     try:
@@ -72,7 +63,7 @@ def scroll():
     response = {"result": "success"}
     status_code = http_status.OK
 
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if data is None:
         data = request.form
     try:
@@ -92,7 +83,7 @@ def show():
     response = {"result": "success"}
     status_code = http_status.OK
 
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if data is None:
         data = request.form
     try:
@@ -118,7 +109,7 @@ def flip():
     response = {"result": "success"}
     status_code = http_status.OK
 
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if data is None:
         data = request.form
     try:
@@ -168,7 +159,11 @@ def start_background_thread():
     api_thread.start()
 
 
-scrollphathd_blueprint.before_app_first_request(start_background_thread)
+@scrollphathd_blueprint.record_once
+def _start_background_thread_on_register(setup_state):
+    # Flask 2.3 removed ``before_app_first_request``; start the worker thread
+    # when the blueprint is registered on an application instead.
+    start_background_thread()
 
 
 # Autoscroll handling
